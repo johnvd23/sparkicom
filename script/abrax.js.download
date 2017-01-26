@@ -1,0 +1,78 @@
+
+var $ = jQuery.noConflict();
+jQuery(document).ready(function($){
+	$('.toggle-title').bind('click', function(){
+		var $t = $(this);
+		if($t.hasClass('opened')){
+			($t.parent().find('.toggle-content').slideUp('fast'));
+			$t.removeClass('opened');
+		}else{
+			($t.parent().find('.toggle-content').slideDown('fast'));
+			$t.addClass('opened');
+		}
+	})
+	//console.log(window.THEME_URL);
+	$('.info .close-btn').bind('click', function(){
+		var $t = $(this);
+		var id= $t.parent().attr('id');
+		$.post(window.THEME_URL+"shortcodes/misc/cookiesaver.php", { info_close_cookie: id },
+		   function(data) {
+		     //console.log("Data Loaded: " + data);
+		   });
+		     $t.parent().slideUp("slow");
+	})
+	
+	//tabs//
+	var tabContainers = $('div.tabs > div');
+
+    for(var i=0;i<tabContainers.parent().length;i++)  
+    {
+		tabContainers.hide();
+		tabContainers.parent().eq(0).children().eq(1).show();
+		tabContainers.parent().eq(1).children().eq(1).show();
+		tabContainers.parent().eq(i).find('ul.tabNavigation a').first().addClass('selected');  
+    }    
+	tabContainers.parent().find('ul.tabNavigation a').filter(':first').click(); 
+          
+	for(var i=0;i<tabContainers.parent().length;i++){         
+		tabContainers.parent().eq(i).find('ul.tabNavigation a').bind('click', function(){
+		    var $cthis=$(this);
+		    var $t = $(this).parent().parent().parent();
+		    var tabContainers = $(this).parent().parent().parent().find('div');
+		
+				tabContainers.hide();
+				tabContainers.filter(this.hash).show();       
+				$(this).parent().parent().parent().find('ul.tabNavigation a').removeClass('selected');
+				$cthis.addClass('selected');
+				return false;
+			})
+		                        
+	 }
+	 /*
+	 //if you want to enable footer sticked to the bottom at large resolutions uncomment this.
+	 $(window).bind('resize', handle_resize);
+	 handle_resize();
+	 */
+})
+function handle_resize(){
+	console.log($(window).height(), ( $('.page_container').height() + 200) )
+	var allsize = $('.page_container').height() + $('#main').height() + $('#mainbottom').height() + $('#feature').height() + $('#footer').height() + $('#bottom').height(); 
+	 if($(window).height() > allsize + 20 ){
+	 	$('#bottom').css({
+	 		'position' : 'absolute',
+	 		'bottom' : 0 + parseInt($('#footer').height())
+	 	})
+	 	$('#footer').css({
+	 		'position' : 'absolute',
+	 		'bottom' : 0
+	 	})
+	 }else{
+	 	$('#bottom').css({
+	 		'position' : 'static'
+	 	})
+	 	$('#footer').css({
+	 		'position' : 'static'
+	 	})
+	 }
+	
+}

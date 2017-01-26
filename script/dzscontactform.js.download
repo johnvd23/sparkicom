@@ -1,0 +1,30 @@
+function validate_email(address) {
+   var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+   if(reg.test(address) == false) {
+      return false;
+   }
+   else
+   return true;
+}
+
+jQuery(document).ready(function(){
+	jQuery('.dzscontactform .dzssubmit').click(validate_all);
+})
+function validate_all(){
+	
+		if(validate_email(jQuery('.dzscontactform .dzsemail').val())==false){
+			alert('invalid email');
+			jQuery('.dzscontactform .dzsemail').focus();
+			return false;
+		}
+		if(jQuery('.dzscontactform .dzsname').val()==''){
+			alert('invalid name');
+			jQuery('.dzscontactform .dzsname').focus();
+			return false;
+		}
+		if(jQuery('.dzscontactform .dzsmessage').val()==''){
+			alert('invalid message');
+			jQuery('.dzscontactform .dzsmessage').focus();
+			return false;
+		}
+}

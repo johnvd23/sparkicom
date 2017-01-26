@@ -1,0 +1,17 @@
+/*
+Theme Name: Abrax Template
+Theme URI: http://digitalzoomstudio.net/
+Description: Beside looking awesome, ABRAX Theme is customizable, easy to use, documented and packed with cool features..
+Author: DZS & Marius Hogas
+Version: 2.2
+Tags: custom background, style chooser, font chooser, shortcodes, wp3 menu, media gallery, backend
+*/
+
+
+@import url('css/reset.css');
+@import url('css/960.css');
+@import url('css/styles.css');
+@import url('css/color.css');
+@import url('css/shortcodes.css');
+@import url('css/superfish.css');
+@import url('css/custom.css');
